@@ -7,9 +7,15 @@
 
 #import <Foundation/Foundation.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSDate (Extension)
+
+#pragma mark - 打印专用
+/// 输出当前时间，格式为：年月日时分秒毫秒
++ (const char *)getPrintCurrentFormatterTime;
+
 
 - (NSString *)timestampString;
 

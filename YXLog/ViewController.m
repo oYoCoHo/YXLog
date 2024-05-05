@@ -6,7 +6,7 @@
 //
 
 #import "ViewController.h"
-
+#import "YXLog.h"
 @interface ViewController ()
 
 @end
@@ -16,6 +16,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        DLog(@"ViewController");
+    });
 }
 
 

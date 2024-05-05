@@ -9,6 +9,23 @@
 
 @implementation NSDate (Extension)
 
+#pragma mark - 打印专用
+/// 输出当前时间，格式为：年月日时分秒毫秒
++ (const char *)getPrintCurrentFormatterTime {
+    static NSDateFormatter *formatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss:";
+    });
+    double timer = CFAbsoluteTimeGetCurrent();
+    unsigned long num = timer;
+    num = (timer - num) * 1000000;
+    NSString *time = [[NSString alloc] initWithFormat:@"%@%lu", [formatter stringFromDate:NSDate.date], num];
+    return [time UTF8String];
+}
+
+
 - (NSString *)timestampString {
     NSTimeInterval nowtime = [self timeIntervalSince1970]*1000;
     NSString *timeStr = [NSString stringWithFormat:@"%.0f",nowtime];
