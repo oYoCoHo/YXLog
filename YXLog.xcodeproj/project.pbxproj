@@ -29,6 +29,7 @@
 		13B2C5292BE7C79800E22C53 /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B2C51C2BE7C79800E22C53 /* MJPropertyKey.m */; };
 		13B2C52A2BE7C79800E22C53 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B2C5202BE7C79800E22C53 /* MJFoundation.m */; };
 		13B2C5302BE7C8A500E22C53 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B2C52F2BE7C8A500E22C53 /* NSDate+Extension.m */; };
+		13B2C5342BE7D45200E22C53 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 13B2C5322BE7D45200E22C53 /* fishhook.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,9 @@
 		13B2C5202BE7C79800E22C53 /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
 		13B2C52E2BE7C8A500E22C53 /* NSDate+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		13B2C52F2BE7C8A500E22C53 /* NSDate+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		13B2C5322BE7D45200E22C53 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
+		13B2C5332BE7D45200E22C53 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
+		13B2C5352BE7D4A600E22C53 /* HookNSLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HookNSLog.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,9 +158,11 @@
 				13B2C4E22BE7C30500E22C53 /* main.m */,
 				13B2C5052BE7C40500E22C53 /* YXLog.h */,
 				13B2C5062BE7C40500E22C53 /* YXLog.m */,
+				13B2C5312BE7D45200E22C53 /* fishhook */,
 				13B2C50B2BE7C79800E22C53 /* MJExtension */,
 				13B2C52E2BE7C8A500E22C53 /* NSDate+Extension.h */,
 				13B2C52F2BE7C8A500E22C53 /* NSDate+Extension.m */,
+				13B2C5352BE7D4A600E22C53 /* HookNSLog.h */,
 			);
 			path = YXLog;
 			sourceTree = "<group>";
@@ -204,6 +210,15 @@
 				13B2C5202BE7C79800E22C53 /* MJFoundation.m */,
 			);
 			path = MJExtension;
+			sourceTree = "<group>";
+		};
+		13B2C5312BE7D45200E22C53 /* fishhook */ = {
+			isa = PBXGroup;
+			children = (
+				13B2C5322BE7D45200E22C53 /* fishhook.c */,
+				13B2C5332BE7D45200E22C53 /* fishhook.h */,
+			);
+			path = fishhook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +353,7 @@
 			files = (
 				13B2C4D82BE7C30500E22C53 /* ViewController.m in Sources */,
 				13B2C5292BE7C79800E22C53 /* MJPropertyKey.m in Sources */,
+				13B2C5342BE7D45200E22C53 /* fishhook.c in Sources */,
 				13B2C5072BE7C40500E22C53 /* YXLog.m in Sources */,
 				13B2C52A2BE7C79800E22C53 /* MJFoundation.m in Sources */,
 				13B2C5262BE7C79800E22C53 /* NSObject+MJProperty.m in Sources */,
