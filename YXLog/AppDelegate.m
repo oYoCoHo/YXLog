@@ -7,6 +7,7 @@
 
 #import "AppDelegate.h"
 #import "HookNSLog.h"
+#import "CPPBridge.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +20,8 @@
     // Override point for customization after application launch.
     
     hookNSLog();
+    
+    [[CPPBridge new] touchBridgeAction];
     
     return YES;
 }

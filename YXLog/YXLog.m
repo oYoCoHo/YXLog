@@ -71,7 +71,7 @@
 }
 
 #pragma mark 保存日志信息
-- (void)saveLogWithLogType:(YXLogType)logType actionName:(NSString*)action_name action_info:(NSDictionary*)action_info {
+- (void)saveLogWithLogType:(YXLogType)logType actionName:(NSString*)action_name action_info:(NSString*)action_info {
     uint64_t currentTimestamp = [NSDate getCurrentTimestamp];
     //不阻塞外界业务线程
     dispatch_async(dispatch_get_global_queue(0,0),^{
@@ -96,6 +96,8 @@
         if (![[NSFileManager defaultManager] fileExistsAtPath:logFolder]) {
                 [[NSFileManager defaultManager] createDirectoryAtPath:logFolder withIntermediateDirectories:YES attributes:nil error:nil];
         }
+        NSLog(@"日志地址:%@",logFolder);
+        
         NSString *dateString = [NSDate dateStringWithSecondTimestamp:(currentTimestamp/1000) WithFormat:@"YYYYMMdd"];
         NSString *prefix = [self getPrefixPathNameWithLogType:logType];
         NSString *pathName = [NSString stringWithFormat:@"%@_%@",prefix,dateString];
