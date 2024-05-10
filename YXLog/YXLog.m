@@ -60,7 +60,7 @@
     
     //获取日志信息
     NSString *logFolderName = [self getLogFolderWithLogType:logType];
-    NSString *logFolder = [NSString stringWithFormat:@"%@/%@",logFolderName,YX_Cache_Path];
+    NSString *logFolder = [NSString stringWithFormat:@"%@/%@",YX_Cache_Path,logFolderName];
     NSString *dateString = [NSDate dateStringWithSecondTimestamp:(log_time_int.longLongValue/1000) WithFormat:@"YYYYMMdd"];
     NSString *prefix = [self getPrefixPathNameWithLogType:logType];
     NSString *pathName = [NSString stringWithFormat:@"%@_%@",prefix,dateString];
@@ -92,7 +92,7 @@
         
         
         NSString *logFolderName = [self getLogFolderWithLogType:logType];
-        NSString *logFolder = [NSString stringWithFormat:@"%@/%@",logFolderName,YX_Cache_Path];
+        NSString *logFolder = [NSString stringWithFormat:@"%@/%@",YX_Cache_Path,logFolderName];
         if (![[NSFileManager defaultManager] fileExistsAtPath:logFolder]) {
                 [[NSFileManager defaultManager] createDirectoryAtPath:logFolder withIntermediateDirectories:YES attributes:nil error:nil];
         }
