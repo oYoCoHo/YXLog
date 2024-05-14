@@ -20,6 +20,9 @@ Session *sss;
 std::map<int, Session*> activeSession;//会话容器
 pthread_mutex_t g_session_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+//song 20240510
+std::map<vl_uint32,std::string> userSSRCMap; // 以int为键，std::string为值的map对象// 以int为键，std::string为值的map对象
+pthread_mutex_t user_ssrc_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 static uint8_t gReportConvertNettype(uint8_t netType) { //报告转换网类型
     uint8_t report_type = 0;
@@ -353,11 +356,14 @@ void incoming_trigger(int type, int send_id, int recv_id, int ssrc)
         fgets(str,100,f);
     }
     int num1=atoi(str);
-
+    
+    
+    
     Session *sess = getSessionById(num1); //通过sid从容器中获取会话
     createListen(sess,ssrc);
     startListen(sess,ssrc);
     mediaCallback.onNewIncomingTransByJNI(type, send_id, recv_id, ssrc);
+    
     
     
     
@@ -372,8 +378,37 @@ void incoming_trigger(int type, int send_id, int recv_id, int ssrc)
     
     printf("赋值后recvBuff>>>>>>%s\n", recvBuff);
     
+    
+    //song
+    pthread_mutex_lock(&user_ssrc_mutex);
+    userSSRCMap[(vl_uint32) ssrc]= std::string(recvBuff);
+    pthread_mutex_unlock(&user_ssrc_mutex);
 }
 
+
+//song 流通知 说话提示框
+void incoming_trigger_(int ssrc){
+
+     pthread_mutex_lock(&user_ssrc_mutex);
+     auto it = userSSRCMap.find((vl_uint32)ssrc);
+     if (it != userSSRCMap.end()) {
+         it->second;
+         
+         char tempBuff[100];
+         memset(tempBuff,0,sizeof(tempBuff));
+         sprintf(tempBuff, "%s",it->second.c_str());
+         
+         TestObject().testFunction(tempBuff);
+         TestObject().playFunction();
+         
+         userSSRCMap.erase(it);
+        
+     } else {
+        
+     }
+     pthread_mutex_unlock(&user_ssrc_mutex);
+
+}
 
 
 

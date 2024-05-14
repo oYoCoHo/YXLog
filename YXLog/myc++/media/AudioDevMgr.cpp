@@ -20,6 +20,8 @@
 #include <printf.h>
 #include "TestObject.hpp"
 
+#include "LanguageBridge.h"
+
 
 #define _MALLOC malloc
 #define _FREE free
@@ -67,7 +69,7 @@ void HandleOutputBuffer (
   HandleOutputBuffer是当前流的接收，这里应该会耗费时间
   */
 //        printf("缓冲区填充数据大小  %d\n ",inBuffer->mAudioDataByteSize);
-        
+        printf("HandleOutputBuffer***");
         if(VL_TRUE == pAuddev->playing) {
             if(NULL != pAuddev->feeder) {
                 /* 计算内部pcm缓冲可容纳多少个sample, 不考虑字节样本空缺 */
@@ -892,6 +894,7 @@ vl_status AudioDevMgr::startPlay(int handler) {
     
 //    printf("locale_afilePlay的状态是>>>>>%d\n\n", locale_afilePlay);
     
+    
     if (locale_afilePlay!=1) {
 //            usleep(500*1000);
         printf("播放前的数据显示>>>>>>>>>%s\n\n", recvBuff);
@@ -905,6 +908,7 @@ vl_status AudioDevMgr::startPlay(int handler) {
     }
     
     printf("-----------------开始播放---------------------\n\n");
+
     usleep(800*1000);
     time_t starttime;
     time(&starttime);
@@ -1461,6 +1465,9 @@ vl_status AudioDevMgr::stopRecord(int handler)
         printf("the queue is NULL!!!!!!!!======\n");
     }
     recordMarkStop();
+    // TODO: 叶炽华 联调 通过修改状态解决录音后无法再次播放
+    StreamPlayScheduler::getInstance()->terminatePlay();
+    
     return status;
 }
 

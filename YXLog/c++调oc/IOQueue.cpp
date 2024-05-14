@@ -7,7 +7,8 @@
 
 #include "IOQueue.hpp"
 #include <iostream>
-#include "YXLog-C-Function.h"
+//#include "YXLog-C-Function.h"
+#import "Bridge.h"
 
 
 //void IOQueue::openRead() {

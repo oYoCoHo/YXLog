@@ -57,16 +57,22 @@ void myPrintf(const char *format, ...) {
     
 #ifdef DEBUG
     time_t t = time(NULL);
+    struct timeval tv;
     struct tm *tm_info = localtime(&t);
-    char time_str[20];
+    char time_str[100];
     strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", tm_info);
+    // 添加毫秒部分
+    snprintf(time_str + strlen(time_str), sizeof(time_str) - strlen(time_str), ".%03d", (int)(tv.tv_usec / 1000));
     NSString *timeString = [[NSString alloc] initWithUTF8String:time_str];
     const char *methodName = __PRETTY_FUNCTION__;
     int lineNumber = __LINE__;
-//    const char *logMessage = [[NSString stringWithFormat:(format), args] UTF8String];
     
+    // 将format和可变参数列表合并成一个字符串
+    char logMessage[1024];
+    vsnprintf(logMessage, sizeof(logMessage), format, args);
     // 使用标志位将printf重定向为原始的printf函数，避免递归调用
-    origPrintf("🌈:::: Time::: %s, Method:: %s, Line: %d \n%s\n", timeString.UTF8String, methodName, lineNumber, format);
+//    origPrintf("🌈:::: Time::: %s, Method:: %s, Line: %d \n%s\n", timeString.UTF8String, methodName, lineNumber, logMessage);
+    origPrintf("🌈:::: Time::: %s \n%s\n", timeString.UTF8String, logMessage);
 #else
     // Do nothing in release mode
 #endif

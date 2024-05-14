@@ -14,7 +14,8 @@ using namespace std;
 #define INCOMING_ELECT_PLAY (20 * 1000)
 
 extern void* streamplay_monitor_looper(void* param);
-
+//song 20240510
+extern void incoming_trigger_(int ssrc);
 enum AudioPauseState {
   EP_PLAY,
   EP_PAUSING,

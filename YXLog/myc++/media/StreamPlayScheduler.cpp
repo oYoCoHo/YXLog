@@ -61,11 +61,11 @@ void* streamplay_monitor_looper(void* param) {
                 printf("开始时间是startTime>>>>%ld, 结束时间是now>>>>>%ld \n", startTime, now);
                 if (number > 1) {
                     double diff = difftime(now, startTime);
-                    if (diff >= 63.0)
-                    {
-                        monitor->activeSouce->spsSetPlayState(SPS_NO_MORE);
-                        startTime = now;
-                    }
+//                    if (diff >= 63.0)
+//                    {
+//                        monitor->activeSouce->spsSetPlayState(SPS_NO_MORE);
+//                        startTime = now;
+//                    }
                 }
                 
                 
@@ -229,11 +229,13 @@ void StreamPlayScheduler::processEngross() {
                 if (VL_SUCCESS == source->spsStartTrack()) {
                     activeSouce = source;
                     if (NULL != observer) {
-                        observer->onPlayStarted(source->spsGetIdentify());
-                        // TODO: 叶炽华 联调
-                        TestObject().testFunction(recvBuff);
-                        // TODO: 叶炽华 联调
-                        TestObject().playFunction();
+//                        observer->onPlayStarted(source->spsGetIdentify());
+//                        // TODO: 叶炽华 联调
+//                        TestObject().testFunction(recvBuff);
+//                        // TODO: 叶炽华 联调
+//                        TestObject().playFunction();
+                        // TODO: song
+                        incoming_trigger_( source->spsGetIdentify());
                     }
                     printf("StreamPlayScheduler engross source finded and raised, eid = %d, id = %d \n",
                            source->spsGetPermitId(), source->spsGetIdentify());
@@ -274,6 +276,7 @@ void StreamPlayScheduler::processNormal() {
 //            iter++;
 //        }
 //    }
+    
     printf("进入processNormal----------\n");
     /* 处理独占类型 */
         if (NULL == activeSouce) {
@@ -285,11 +288,13 @@ void StreamPlayScheduler::processNormal() {
                     if (VL_SUCCESS == source->spsStartTrack()) {
                         activeSouce = source;
                         if (NULL != observer) {
-                            observer->onPlayStarted(source->spsGetIdentify());
-                            // TODO: 叶炽华 联调
-                            TestObject().testFunction(recvBuff);
-                            // TODO: 叶炽华 联调
-                            TestObject().playFunction();
+//                            observer->onPlayStarted(source->spsGetIdentify());
+//                            // TODO: 叶炽华 联调
+//                            TestObject().testFunction(recvBuff);
+//                            // TODO: 叶炽华 联调
+//                            TestObject().playFunction();
+                            // TODO: song
+                            incoming_trigger_( source->spsGetIdentify());
                         }
                         printf("StreamPlayScheduler engross source finded and raised, eid = %d, id = %d \n",
                                source->spsGetPermitId(), source->spsGetIdentify());
@@ -536,7 +541,9 @@ void StreamPlayScheduler::wakeupSeraial()
 
 
 void StreamPlayScheduler::terminatePlay() {
+    printf("StreamPlayScheduler::terminatePlay");
     if (NULL != activeSouce) {
+        printf("StreamPlayScheduler::terminatePlay*********");
         activeSouce->spsSetPlayState(SPS_NO_MORE);
         wakeup();
     }
@@ -544,7 +551,9 @@ void StreamPlayScheduler::terminatePlay() {
 
 
 void StreamPlayScheduler::terminatePlay(vl_uint32 ssrc) {
+    printf("StreamPlayScheduler::terminatePlay()");
     if (NULL != activeSouce && activeSouce->spsGetIdentify() == ssrc) {
+        printf("StreamPlayScheduler::terminatePlay()*************");
         activeSouce->spsSetPlayState(SPS_NO_MORE);
         wakeup();
     }

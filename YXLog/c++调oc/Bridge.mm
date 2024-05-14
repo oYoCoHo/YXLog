@@ -22,7 +22,8 @@
 
 
 
-#include "YXLog-C-Function.h"
+//#include "YXLog-C-Function.h"
+#import "Bridge.h"
 #import "YXLog.h"
 
 #pragma mark c实现
